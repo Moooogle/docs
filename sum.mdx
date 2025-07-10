@@ -3,3 +3,115 @@ title: "概述"
 description: "欢迎使用 PaymentKit Node.js SDK，这是一个全面的解决方案，用于管理支付资源和在应用程序中实现基于信用的计费。本文档将指导您了解 PaymentKit SDK 的功能、特性和实现。"
 sidebarTitle: "Started"
 ---
+
+### 什么是 Payment Kit ？
+
+PaymentKit 是一个强大的支付处理解决方案，使开发人员能够将各种支付功能集成到他们的应用程序中。该 SDK 提供了丰富的功能集，用于管理客户、订阅、产品、价格、支付以及基于信用的计费（包括计量器和信用授予）。
+
+![image.png](/images/image.png)
+
+## 主要功能
+
+PaymentKit 提供了广泛的功能，帮助您管理应用程序中的支付流程：
+
+| 功能类别       | 能力                  |
+| ---------- | ------------------- |
+| 客户管理       | 创建、检索、更新和管理客户数据     |
+| 产品和价格管理    | 定义产品并配置价格选项         |
+| 订阅处理       | 通过灵活的订阅选项管理周期性计费    |
+| 支付处理       | 安全处理一次性和周期性支付       |
+| 结账集成       | 创建可定制的结账体验          |
+| 基于信用的计费    | 实现基于使用量的计费，包含信用和计量器 |
+| Webhook 支持 | 接收支付事件的实时通知         |
+| 退款处理       | 无缝处理退款和退货           |
+
+## 安装
+
+开始使用 PaymentKit 非常简单：
+
+```
+npm install @blocklet/payment-js
+```
+
+## 基本配置
+
+使用您所需的环境配置 SDK：
+
+```
+import payment from '@blocklet/payment-js';
+
+// 设置环境模式
+payment.environments.setTestMode(true);      // 使用测试环境
+// payment.environments.setLiveMode(true);   // 使用生产环境
+```
+
+SDK 支持通过环境变量进行配置：
+
+- `PAYMENT_LIVE_MODE`：设置为 'true' 启用生产模式
+- `PAYMENT_TEST_MODE`：设置为 'true' 启用测试模式
+- 
+
+## 核心组件
+
+PaymentKit SDK 包含几个核心组件，它们协同工作提供完整的支付解决方案：
+
+![Bda1dc3e 1a39 4b37 A44d F17fcda0bfff Pn](/images/bda1dc3e-1a39-4b37-a44d-f17fcda0bfff.png)
+
+### **支付处理**
+
+PaymentKit 支持各种支付方式和货币，让您能够安全地处理支付。您可以创建支付意向、生成结账会话，并管理整个支付生命周期。
+
+### **订阅管理**
+
+创建和管理具有灵活订阅选项的周期性计费，包括试用期、暂停和取消。跟踪使用情况并管理订阅项目，以实现基于使用量的计费模型。
+
+### **基于信用的计费**
+
+实现复杂的基于信用的计费系统，使用计量器跟踪使用情况，通过信用授予向客户分配信用额度，并提供详细的交易历史记录以监控信用消费。
+
+### **Webhooks**
+
+通过配置 webhook 端点接收事件通知，实时了解支付事件，如成功付款、订阅续订等。
+
+## **使用示例**
+
+以下是创建结账会话的简单示例：
+
+```
+const session = await payment.checkout.sessions.create({
+  success_url: 'https://example.com/success',
+  cancel_url: 'https://example.com/cancel',
+  mode: 'payment',
+  line_items: [
+    { price_id: 'price_xxx', quantity: 1 }
+  ],
+  expires_at: 1729243800
+});
+```
+
+这将创建一个一次性支付的结账会话，指定了价格和数量。
+
+## **API 资源**
+
+PaymentKit 提供了一套全面的 API 资源，用于管理支付系统的不同方面：
+
+| 资源类别     | 描述             |
+| -------- | -------------- |
+| 客户       | 管理客户信息和支付方式    |
+| 产品和价格    | 定义您销售的内容及其价格   |
+| 订阅       | 处理周期性计费和订阅生命周期 |
+| 支付       | 处理支付和退款        |
+| 结账       | 创建结账会话以收取款项    |
+| 基于信用的计费  | 实现基于使用量的信用计费   |
+| Webhooks | 接收关于支付事件的通知    |
+
+## **后续步骤**
+
+现在您已经对 PaymentKit SDK 有了基本了解，您可以：
+
+1. [**开始使用**](https://www.staging.arcblock.io/content/docs/payment-kit-ai-version/zh/payment-kit-ai-version-getting-started-md)，获取详细的安装和配置说明
+2. 了解 PaymentKit 生态系统中的[**核心概念**](https://www.staging.arcblock.io/content/docs/payment-kit-ai-version/zh/payment-kit-ai-version-core-concepts-md)
+3. 探索实现常见支付场景的[**指南**](https://www.staging.arcblock.io/content/docs/payment-kit-ai-version/zh/payment-kit-ai-version-guides-md)
+4. 参考[**API 文档**](https://www.staging.arcblock.io/content/docs/payment-kit-ai-version/zh/payment-kit-ai-version-api-reference-md)，获取每个 API 方法的详细信息
+
+通过利用 PaymentKit 的功能，您可以在应用程序中实现强大的支付处理和计费系统，从简单的一次性支付到复杂的订阅和基于信用的模型。
